@@ -1,60 +1,72 @@
-const accounts = [
-  {
-    id: 1,
-    game: "MLBB",
-    category: "mlbb",
-    name: "MLBB Account #001",
-    description: "Account sedang menerima paid promote.",
-    price: "RM10",
-    status: "AVAILABLE",
-    image: ""
-  },
-  {
-    id: 2,
-    game: "FREE FIRE",
-    category: "freefire",
-    name: "Free Fire Account #001",
-    description: "Account sedang menerima paid promote.",
-    price: "RM10",
-    status: "AVAILABLE",
-    image: ""
-  },
-  {
-    id: 3,
-    game: "PUBG",
-    category: "pubg",
-    name: "PUBG Account #001",
-    description: "Account sedang menerima paid promote.",
-    price: "RM10",
-    status: "AVAILABLE",
-    image: ""
-  },
-  {
-    id: 4,
-    game: "LAIN",
-    category: "lain",
-    name: "Game Account #001",
-    description: "Account sedang menerima paid promote.",
-    price: "RM10",
-    status: "AVAILABLE",
-    image: ""
-  }
-];
+const API_URL =
+  "https://xnzpaidpromote-api.xnzresellerbackup.workers.dev/api/accounts";
+
+let accounts = [];
 
 const accountGrid = document.getElementById("accountGrid");
 const accountCount = document.getElementById("accountCount");
 const emptyState = document.getElementById("emptyState");
 const filterButtons = document.querySelectorAll(".filter-btn");
 
+function escapeHTML(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function getCategory(game) {
+  const value = String(game || "").toUpperCase();
+
+  if (value === "MLBB") return "mlbb";
+  if (value === "FREE FIRE") return "freefire";
+  if (value === "PUBG") return "pubg";
+
+  return "lain";
+}
+
+async function loadAccounts() {
+  try {
+    const response = await fetch(API_URL);
+
+    if (!response.ok) {
+      throw new Error("API error");
+    }
+
+    const data = await response.json();
+
+    accounts = (data.accounts || []).map(account => ({
+      id: account.id,
+      game: account.game || "LAIN",
+      category: getCategory(account.game),
+      name: account.account_name || "Game Account",
+      description: account.details || "",
+      price: "RM" + Number(account.price || 0),
+      status: account.status || "AVAILABLE",
+      image: account.image_url || "",
+      username: account.username || ""
+    }));
+
+    showAccounts();
+  } catch (error) {
+    console.error("Gagal ambil account:", error);
+
+    accounts = [];
+    showAccounts();
+  }
+}
+
 function showAccounts(category = "all") {
-  const list = category === "all"
-    ? accounts
-    : accounts.filter(account => account.category === category);
+  const list =
+    category === "all"
+      ? accounts
+      : accounts.filter(account => account.category === category);
 
   accountGrid.innerHTML = "";
 
-  accountCount.textContent =
-    `${list.length} ACCOUNT`;
+  accountCount.textContent = `${list.length} ACCOUNT`;
 
   if (!list.length) {
     emptyState.classList.remove("hidden");
@@ -64,12 +76,11 @@ function showAccounts(category = "all") {
   emptyState.classList.add("hidden");
 
   list.forEach(account => {
-
     const image = account.image
-      ? `<img src="${account.image}" alt="${account.name}">`
+      ? `<img src="${escapeHTML(account.image)}" alt="${escapeHTML(account.name)}">`
       : `
         <div class="image-placeholder">
-          <strong>${account.game.substring(0,3)}</strong>
+          <strong>${escapeHTML(account.game.substring(0, 3))}</strong>
           <span>PAID PROMOTE</span>
         </div>
       `;
@@ -83,7 +94,7 @@ function showAccounts(category = "all") {
 
         <div class="account-status">
           <span class="account-status-dot"></span>
-          ${account.status}
+          ${escapeHTML(account.status)}
         </div>
 
         ${image}
@@ -93,27 +104,27 @@ function showAccounts(category = "all") {
       <div class="account-info">
 
         <div class="account-game">
-          ${account.game}
+          ${escapeHTML(account.game)}
         </div>
 
         <h3 class="account-name">
-          ${account.name}
+          ${escapeHTML(account.name)}
         </h3>
 
         <p class="account-description">
-          ${account.description}
+          ${escapeHTML(account.description)}
         </p>
 
         <div class="account-bottom">
 
           <div class="account-price">
-            ${account.price}
+            ${escapeHTML(account.price)}
             <small>PAID PROMOTE</small>
           </div>
 
           <button
             class="account-button"
-            onclick="contactAccount('${account.name}')">
+            onclick="contactAccount('${escapeHTML(account.name)}')">
             PROMOTE
           </button>
 
@@ -127,7 +138,6 @@ function showAccounts(category = "all") {
 }
 
 function contactAccount(accountName) {
-
   const text =
     `Hi XNZ, saya berminat dengan paid promote untuk ${accountName}. Saya ingin tahu maklumat lanjut.`;
 
@@ -138,9 +148,7 @@ function contactAccount(accountName) {
 }
 
 filterButtons.forEach(button => {
-
   button.addEventListener("click", () => {
-
     filterButtons.forEach(btn =>
       btn.classList.remove("active")
     );
@@ -148,9 +156,7 @@ filterButtons.forEach(button => {
     button.classList.add("active");
 
     showAccounts(button.dataset.game);
-
   });
-
 });
 
-showAccounts();
+loadAccounts();
