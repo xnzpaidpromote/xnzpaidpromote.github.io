@@ -1,145 +1,169 @@
-const openPanel = document.getElementById("openPanel");
-const closePanel = document.getElementById("closePanel");
-const bottomPanel = document.getElementById("bottomPanel");
-const panelOverlay = document.getElementById("panelOverlay");
+const openPanel=document.getElementById("openPanel");
+const closePanel=document.getElementById("closePanel");
+const bottomPanel=document.getElementById("bottomPanel");
+const panelOverlay=document.getElementById("panelOverlay");
 
-function openMenu() {
-  bottomPanel.classList.add("active");
-  panelOverlay.classList.add("active");
-  document.body.style.overflow = "hidden";
+function openMenu(){
+bottomPanel.classList.add("active");
+panelOverlay.classList.add("active");
+document.body.style.overflow="hidden";
 }
 
-function closeMenu() {
-  bottomPanel.classList.remove("active");
-  panelOverlay.classList.remove("active");
-  document.body.style.overflow = "";
+function closeMenu(){
+bottomPanel.classList.remove("active");
+panelOverlay.classList.remove("active");
+document.body.style.overflow="";
 }
 
-openPanel.addEventListener("click", openMenu);
-closePanel.addEventListener("click", closeMenu);
-panelOverlay.addEventListener("click", closeMenu);
+openPanel.addEventListener("click",openMenu);
+closePanel.addEventListener("click",closeMenu);
+panelOverlay.addEventListener("click",closeMenu);
+
+
+/* CONTACT PAGE */
+
+const homePage=document.getElementById("homePage");
+const contactPage=document.getElementById("contactPage");
+const panelContact=document.getElementById("panelContact");
+const heroContact=document.getElementById("heroContact");
+const backHome=document.getElementById("backHome");
+
+function showContact(){
+homePage.classList.add("hidden");
+contactPage.classList.remove("hidden");
+closeMenu();
+window.scrollTo(0,0);
+}
+
+function showHome(){
+contactPage.classList.add("hidden");
+homePage.classList.remove("hidden");
+window.scrollTo(0,0);
+}
+
+panelContact.addEventListener("click",showContact);
+heroContact.addEventListener("click",showContact);
+backHome.addEventListener("click",showHome);
 
 
 /* THEME */
 
-const darkBtn = document.getElementById("darkBtn");
-const lightBtn = document.getElementById("lightBtn");
+const darkBtn=document.getElementById("darkBtn");
+const lightBtn=document.getElementById("lightBtn");
 
-function setTheme(theme) {
+function setTheme(theme){
 
-  if (theme === "light") {
-    document.body.classList.add("light");
-    lightBtn.classList.add("active");
-    darkBtn.classList.remove("active");
-    localStorage.setItem("xnzTheme", "light");
-  } else {
-    document.body.classList.remove("light");
-    darkBtn.classList.add("active");
-    lightBtn.classList.remove("active");
-    localStorage.setItem("xnzTheme", "dark");
-  }
+if(theme==="light"){
+document.body.classList.add("light");
+lightBtn.classList.add("active");
+darkBtn.classList.remove("active");
+localStorage.setItem("xnzTheme","light");
+}else{
+document.body.classList.remove("light");
+darkBtn.classList.add("active");
+lightBtn.classList.remove("active");
+localStorage.setItem("xnzTheme","dark");
+}
 
 }
 
-darkBtn.addEventListener("click", () => setTheme("dark"));
-lightBtn.addEventListener("click", () => setTheme("light"));
+darkBtn.addEventListener("click",()=>setTheme("dark"));
+lightBtn.addEventListener("click",()=>setTheme("light"));
 
-const savedTheme = localStorage.getItem("xnzTheme");
+const savedTheme=localStorage.getItem("xnzTheme");
 
-if (savedTheme) {
-  setTheme(savedTheme);
+if(savedTheme){
+setTheme(savedTheme);
 }
 
 
 /* LANGUAGE */
 
-const langMY = document.getElementById("langMY");
-const langEN = document.getElementById("langEN");
+const langMY=document.getElementById("langMY");
+const langEN=document.getElementById("langEN");
 
-langMY.addEventListener("click", () => {
+function setLanguage(lang){
 
-  langMY.classList.add("active");
-  langEN.classList.remove("active");
+document.querySelectorAll("[data-ms]").forEach(el=>{
 
-  document.documentElement.lang = "ms";
+el.textContent=lang==="en"
+?el.dataset.en
+:el.dataset.ms;
 
-  alert("Bahasa MY telah dipilih.");
+});
+
+document.querySelectorAll("[data-placeholder-ms]").forEach(el=>{
+
+el.placeholder=lang==="en"
+?el.dataset.placeholderEn
+:el.dataset.placeholderMs;
 
 });
 
-langEN.addEventListener("click", () => {
+if(lang==="en"){
+langEN.classList.add("active");
+langMY.classList.remove("active");
+document.documentElement.lang="en";
+}else{
+langMY.classList.add("active");
+langEN.classList.remove("active");
+document.documentElement.lang="ms";
+}
 
-  langEN.classList.add("active");
-  langMY.classList.remove("active");
+localStorage.setItem("xnzLang",lang);
 
-  document.documentElement.lang = "en";
+}
 
-  alert("English language selected.");
+langMY.addEventListener("click",()=>setLanguage("my"));
+langEN.addEventListener("click",()=>setLanguage("en"));
 
-});
+const savedLang=localStorage.getItem("xnzLang")||"my";
+setLanguage(savedLang);
 
 
 /* CONTACT FORM */
 
-const contactForm = document.getElementById("contactForm");
+const contactForm=document.getElementById("contactForm");
 
-contactForm.addEventListener("submit", function(event) {
+contactForm.addEventListener("submit",function(e){
 
-  event.preventDefault();
+e.preventDefault();
 
-  const name =
-    document.getElementById("name").value.trim();
+const name=document.getElementById("name").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const message=document.getElementById("message").value.trim();
 
-  const phone =
-    document.getElementById("phone").value.trim();
+if(!name||!phone||!message){
 
-  const message =
-    document.getElementById("message").value.trim();
+alert(
+document.documentElement.lang==="en"
+?"Please complete all fields."
+:"Sila lengkapkan semua maklumat."
+);
 
-  if (!name || !phone || !message) {
-    alert("Sila lengkapkan semua maklumat.");
-    return;
-  }
+return;
+}
 
-  const text =
-    `Hi XNZ, saya ingin membuat pertanyaan paid promote.%0A%0A` +
-    `Nama: ${encodeURIComponent(name)}%0A` +
-    `WhatsApp: ${encodeURIComponent(phone)}%0A` +
-    `Pertanyaan: ${encodeURIComponent(message)}`;
+const text=
+`Hi XNZ, saya ingin membuat pertanyaan paid promote.%0A%0A`+
+`Nama: ${encodeURIComponent(name)}%0A`+
+`WhatsApp: ${encodeURIComponent(phone)}%0A`+
+`Pertanyaan: ${encodeURIComponent(message)}`;
 
-  window.open(
-    `https://wa.me/60143783301?text=${text}`,
-    "_blank"
-  );
-
-});
-
-
-/* CLOSE PANEL AFTER NAVIGATION */
-
-document.querySelectorAll(".panel-nav a").forEach(link => {
-
-  link.addEventListener("click", () => {
-    closeMenu();
-  });
-
-});
-
-document.querySelectorAll(".quick-link").forEach(link => {
-
-  link.addEventListener("click", () => {
-    closeMenu();
-  });
+window.open(
+`https://wa.me/60143783301?text=${text}`,
+"_blank"
+);
 
 });
 
 
-/* ESC KEY */
+/* ESC */
 
-document.addEventListener("keydown", event => {
+document.addEventListener("keydown",e=>{
 
-  if (event.key === "Escape") {
-    closeMenu();
-  }
+if(e.key==="Escape"){
+closeMenu();
+}
 
 });
