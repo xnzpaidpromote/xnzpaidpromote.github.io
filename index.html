@@ -1,409 +1,620 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#050505">
-<meta name="description" content="XNZ Paid Promote - Promote Game Account">
-<title>XNZ PAID PROMOTE</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="XNZ Paid Promote - Platform paid promote game account.">
+  <title>XNZPAID — Paid Promote Game Account</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-<div class="nav">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
 
-<a href="#home" class="logo">XNZ<span>PAID</span></a>
+      <a href="#home" class="logo">
+        <span class="logo-x">XNZ</span><span class="logo-paid">PAID</span>
+      </a>
 
-<button id="menuBtn">☰</button>
+      <button
+        class="panel-button"
+        id="panelButton"
+        type="button"
+        aria-label="Buka Panel"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-<nav id="navMenu">
-<a href="#home">HOME</a>
-<a href="#promote">PROMOTE</a>
-<a href="#accounts">ACCOUNT</a>
-<a href="#cara-order">CARA ORDER</a>
-<a href="#contact">HUBUNGI</a>
-</nav>
+    </div>
+  </header>
 
-</div>
-</header>
 
+  <!-- MAIN -->
+  <main id="home">
 
-<main>
+    <!-- HERO / INTRO -->
+    <section class="hero section">
+
+      <div class="hero-content">
+
+        <div class="gold-badge">
+          <span class="badge-dot"></span>
+          XNZ PAID PROMOTE
+        </div>
+
+        <h1>
+          <span data-i18n="heroTitle1">PROMOTE</span>
+          <strong data-i18n="heroTitle2">YOUR GAME ACCOUNT</strong>
+        </h1>
+
+        <p data-i18n="heroDescription">
+          Tempat untuk mempromosikan game account anda kepada komuniti XNZ.
+          Hantar account, bayar promote, dan biar kami bantu naikkan exposure.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#accounts" class="btn btn-gold" data-i18n="viewAccounts">
+            LIHAT SENARAI ACCOUNT
+          </a>
+
+          <a href="#how-order" class="btn btn-outline" data-i18n="howOrderButton">
+            HOW TO ORDER
+          </a>
+        </div>
+
+      </div>
+
+      <div class="hero-mini-card">
+
+        <div class="mini-top">
+          <span class="mini-status"></span>
+          <span data-i18n="promoteAvailable">PAID PROMOTE AVAILABLE</span>
+        </div>
+
+        <div class="mini-number">XNZ</div>
+
+        <p data-i18n="miniText">
+          Promote account anda dengan mudah melalui WhatsApp Admin XNZ.
+        </p>
+
+        <a
+          href="https://wa.me/60143783301"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mini-wa"
+        >
+          WHATSAPP ADMIN
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- ACCOUNT LIST -->
+    <section class="accounts-section section" id="accounts">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="small-title" data-i18n="accountSmallTitle">
+            XNZ MARKETPLACE
+          </span>
 
-<section class="hero" id="home">
+          <h2 data-i18n="accountTitle">
+            SENARAI ACCOUNT PAID PROMOTE
+          </h2>
 
-<div class="hero-content">
+          <p data-i18n="accountDescription">
+            Lihat account yang sedang dipromosikan di XNZ.
+          </p>
+        </div>
 
-<div>
+        <div class="account-count" id="accountCount">
+          0 ACCOUNT
+        </div>
 
-<small class="badge">XNZ OFFICIAL SERVICE</small>
+      </div>
 
-<h1>
-PROMOTE YOUR
-<span>GAME ACCOUNT</span>
-</h1>
 
-<p>
-Mahu akaun game anda lebih dikenali?
-Gunakan servis Paid Promote XNZ untuk
-membantu memperkenalkan akaun anda
-kepada lebih ramai pelanggan.
-</p>
+      <!-- FILTER -->
+      <div class="filter-bar">
 
-<div class="buttons">
+        <button
+          class="filter-btn active"
+          type="button"
+          data-filter="ALL"
+          data-i18n="allGames"
+        >
+          SEMUA GAME
+        </button>
 
-<a href="#promote" class="btn gold">
-PROMOTE ACCOUNT
-</a>
+        <button
+          class="filter-btn"
+          type="button"
+          data-filter="Mobile Legends"
+        >
+          MOBILE LEGENDS
+        </button>
 
-<a href="#accounts" class="btn outline">
-LIHAT ACCOUNT
-</a>
+        <button
+          class="filter-btn"
+          type="button"
+          data-filter="Free Fire"
+        >
+          FREE FIRE
+        </button>
 
-</div>
+        <button
+          class="filter-btn"
+          type="button"
+          data-filter="PUBG Mobile"
+        >
+          PUBG MOBILE
+        </button>
 
-<div class="stats">
+        <button
+          class="filter-btn"
+          type="button"
+          data-filter="Genshin Impact"
+        >
+          GENSHIN
+        </button>
 
-<div>
-<b>01</b>
-<small>MUDAH</small>
-</div>
+      </div>
 
-<div>
-<b>02</b>
-<small>FAST</small>
-</div>
 
-<div>
-<b>03</b>
-<small>TRUST</small>
-</div>
+      <!-- ACCOUNT GRID -->
+      <div id="accountGrid" class="account-grid"></div>
 
-</div>
+      <div id="emptyAccounts" class="empty-state hidden">
+        <div class="empty-icon">×</div>
+        <h3 data-i18n="noAccount">TIADA ACCOUNT</h3>
+        <p data-i18n="noAccountText">
+          Tiada account untuk kategori ini buat masa sekarang.
+        </p>
+      </div>
 
-</div>
+    </section>
 
 
-<div class="hero-box">
+    <!-- HOW TO ORDER -->
+    <section class="how-section section" id="how-order">
 
-<span>XNZ PAID PROMOTE</span>
+      <div class="section-heading centered">
 
-<strong>YOUR<br>ACCOUNT</strong>
+        <span class="small-title" data-i18n="howSmallTitle">
+          SIMPLE & FAST
+        </span>
 
-<small>DESERVE MORE ATTENTION</small>
+        <h2 data-i18n="howTitle">
+          HOW TO ORDER
+        </h2>
 
-<a href="https://wa.me/60143783301" target="_blank">
-WHATSAPP ADMIN
-</a>
+        <p data-i18n="howDescription">
+          Empat langkah mudah untuk menggunakan servis Paid Promote XNZ.
+        </p>
 
-</div>
+      </div>
 
-</div>
 
-</section>
+      <div class="steps-grid">
 
+        <article class="step-card">
+          <div class="step-number">01</div>
 
+          <div class="step-icon">01</div>
 
-<section class="section" id="promote">
+          <h3 data-i18n="step1Title">HUBUNGI XNZ</h3>
 
-<div class="title">
+          <p data-i18n="step1Text">
+            WhatsApp Admin XNZ dan beritahu anda mahu menggunakan servis Paid Promote.
+          </p>
+        </article>
 
-<span>OUR SERVICE</span>
 
-<h2>PAID <b>PROMOTE</b></h2>
+        <article class="step-card">
+          <div class="step-number">02</div>
 
-<p>Pilih servis yang sesuai dengan keperluan anda.</p>
+          <div class="step-icon">02</div>
 
-</div>
+          <h3 data-i18n="step2Title">HANTAR ACCOUNT</h3>
 
+          <p data-i18n="step2Text">
+            Hantar gambar, nama game dan maklumat account yang mahu dipromosikan.
+          </p>
+        </article>
 
-<div class="service-grid">
 
-<div class="service">
-<em>01</em>
-<h3>BASIC PROMOTE</h3>
-<p>
-Promosi asas untuk akaun game
-dengan proses yang mudah.
-</p>
-<a href="#contact">HUBUNGI →</a>
-</div>
+        <article class="step-card">
+          <div class="step-number">03</div>
 
+          <div class="step-icon">03</div>
 
-<div class="service featured">
+          <h3 data-i18n="step3Title">BUAT BAYARAN</h3>
 
-<i>POPULAR</i>
+          <p data-i18n="step3Text">
+            Pilih pakej promote dan buat bayaran seperti yang diberikan oleh Admin.
+          </p>
+        </article>
 
-<em>02</em>
 
-<h3>PREMIUM PROMOTE</h3>
+        <article class="step-card">
+          <div class="step-number">04</div>
 
-<p>
-Pilihan untuk mendapatkan
-lebih banyak perhatian.
-</p>
+          <div class="step-icon">04</div>
 
-<a href="#contact">HUBUNGI →</a>
+          <h3 data-i18n="step4Title">ACCOUNT DIPROMOTE</h3>
 
-</div>
+          <p data-i18n="step4Text">
+            Selepas pembayaran disahkan, account anda akan dimasukkan ke senarai XNZ.
+          </p>
+        </article>
 
+      </div>
 
-<div class="service">
+    </section>
 
-<em>03</em>
 
-<h3>CUSTOM PROMOTE</h3>
+    <!-- WHY XNZ -->
+    <section class="why-section section" id="why-xnz">
 
-<p>
-Pakej khas boleh dibincangkan
-bersama admin XNZ.
-</p>
+      <div class="why-content">
 
-<a href="#contact">HUBUNGI →</a>
+        <div class="why-title">
 
-</div>
+          <span class="small-title" data-i18n="whySmallTitle">
+            WHY CHOOSE US
+          </span>
 
-</div>
+          <h2>
+            <span data-i18n="whyTitle1">KENAPA</span>
+            <strong>XNZ?</strong>
+          </h2>
 
-</section>
+          <p data-i18n="whyDescription">
+            Kami fokus membantu game account mendapatkan exposure
+            melalui platform XNZ Paid Promote.
+          </p>
 
+        </div>
 
 
-<section class="section dark" id="accounts">
+        <div class="why-list">
 
-<div class="title">
+          <div class="why-item">
+            <div class="why-icon">01</div>
+            <div>
+              <h3 data-i18n="why1Title">DESIGN PREMIUM</h3>
+              <p data-i18n="why1Text">
+                Account anda dipaparkan dalam website yang kemas dan profesional.
+              </p>
+            </div>
+          </div>
 
-<span>ACCOUNT LIST</span>
 
-<h2>ACCOUNT <b>PROMOTE</b></h2>
+          <div class="why-item">
+            <div class="why-icon">02</div>
+            <div>
+              <h3 data-i18n="why2Title">MUDAH DIHUBUNGI</h3>
+              <p data-i18n="why2Text">
+                Pelanggan boleh terus menghubungi anda melalui saluran yang disediakan.
+              </p>
+            </div>
+          </div>
 
-<p>
-Lihat akaun yang sedang dipromosikan.
-</p>
 
-</div>
+          <div class="why-item">
+            <div class="why-icon">03</div>
+            <div>
+              <h3 data-i18n="why3Title">MOBILE FRIENDLY</h3>
+              <p data-i18n="why3Text">
+                Website direka khas supaya selesa digunakan melalui telefon.
+              </p>
+            </div>
+          </div>
 
 
-<div id="accountGrid" class="account-grid"></div>
+          <div class="why-item">
+            <div class="why-icon">04</div>
+            <div>
+              <h3 data-i18n="why4Title">XNZ COMMUNITY</h3>
+              <p data-i18n="why4Text">
+                Jadikan XNZ sebagai tempat untuk meningkatkan exposure account anda.
+              </p>
+            </div>
+          </div>
 
-</section>
+        </div>
 
+      </div>
 
+    </section>
 
-<section class="section" id="cara-order">
 
-<div class="title">
+    <!-- CONTACT -->
+    <section class="contact-section section" id="contact">
 
-<span>HOW TO ORDER</span>
+      <div class="contact-card">
 
-<h2>CARA <b>ORDER</b></h2>
+        <div class="contact-info">
 
-</div>
+          <span class="small-title" data-i18n="contactSmallTitle">
+            CONTACT XNZ
+          </span>
 
+          <h2 data-i18n="contactTitle">
+            HUBUNGI KAMI
+          </h2>
 
-<div class="steps">
+          <p data-i18n="contactDescription">
+            Ada pertanyaan atau mahu buat Paid Promote?
+            Hubungi Admin XNZ melalui WhatsApp.
+          </p>
 
-<div class="step">
-<strong>01</strong>
-<div>
-<h3>HUBUNGI XNZ</h3>
-<p>WhatsApp admin untuk membuat tempahan.</p>
-</div>
-</div>
+          <a
+            href="https://wa.me/60143783301"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-wa"
+          >
+            <span class="wa-symbol">WA</span>
+            <span>
+              <small data-i18n="adminWhatsapp">WHATSAPP ADMIN XNZ</small>
+              <strong>+60 14-378 3301</strong>
+            </span>
+          </a>
 
+        </div>
 
-<div class="step">
-<strong>02</strong>
-<div>
-<h3>HANTAR MAKLUMAT</h3>
-<p>Hantar gambar dan maklumat account.</p>
-</div>
-</div>
 
+        <form id="contactForm" class="contact-form">
 
-<div class="step">
-<strong>03</strong>
-<div>
-<h3>BUAT BAYARAN</h3>
-<p>Buat bayaran selepas harga dipersetujui.</p>
-</div>
-</div>
+          <label for="name" data-i18n="fullName">
+            Nama Penuh
+          </label>
 
+          <input
+            id="name"
+            type="text"
+            autocomplete="name"
+            placeholder="Masukkan nama anda"
+            data-i18n-placeholder="namePlaceholder"
+            required
+          >
 
-<div class="step">
-<strong>04</strong>
-<div>
-<h3>ACCOUNT DIPUBLISH</h3>
-<p>Account akan diproses untuk promosi.</p>
-</div>
-</div>
 
-</div>
+          <label for="phone" data-i18n="whatsappNumber">
+            No. WhatsApp
+          </label>
 
-</section>
+          <input
+            id="phone"
+            type="tel"
+            autocomplete="tel"
+            placeholder="Contoh: 60123456789"
+            data-i18n-placeholder="phonePlaceholder"
+            required
+          >
 
 
+          <label for="message" data-i18n="questionDetails">
+            Butiran Pertanyaan
+          </label>
 
-<section class="section dark">
+          <textarea
+            id="message"
+            rows="5"
+            placeholder="Tulis pertanyaan anda..."
+            data-i18n-placeholder="messagePlaceholder"
+            required
+          ></textarea>
 
-<div class="title">
 
-<span>WHY XNZ</span>
+          <button type="submit" class="submit-btn">
+            <span data-i18n="sendRequest">HANTAR PERMOHONAN</span>
+            <span>→</span>
+          </button>
 
-<h2>KENAPA <b>XNZ?</b></h2>
+        </form>
 
-</div>
+      </div>
 
+    </section>
 
-<div class="why-grid">
+  </main>
 
-<div class="why">
-<strong>✓</strong>
-<h3>MUDAH</h3>
-<p>Proses order mudah dan cepat.</p>
-</div>
 
+  <!-- FOOTER -->
+  <footer class="footer">
 
-<div class="why">
-<strong>⚡</strong>
-<h3>FAST RESPONSE</h3>
-<p>Hubungi admin melalui WhatsApp.</p>
-</div>
+    <div class="footer-inner">
 
+      <div class="footer-logo">
+        XNZ<span>PAID</span>
+      </div>
 
-<div class="why">
-<strong>★</strong>
-<h3>PREMIUM</h3>
-<p>Rekaan website yang moden dan premium.</p>
-</div>
+      <p data-i18n="footerText">
+        Paid Promote Game Account.
+      </p>
 
-</div>
+      <div class="footer-line"></div>
 
-</section>
+      <small>
+        © <span id="year"></span> XNZPAID. All Rights Reserved.
+      </small>
 
+    </div>
 
+  </footer>
 
-<section class="section contact" id="contact">
 
-<div class="contact-grid">
+  <!-- FLOATING PANEL -->
+  <div class="panel-overlay" id="panelOverlay"></div>
 
-<div>
+  <aside class="bottom-panel" id="bottomPanel" aria-hidden="true">
 
-<span>CONTACT CENTER</span>
+    <div class="panel-handle"></div>
 
-<h2>
-HUBUNGI
-<b>KAMI</b>
-</h2>
+    <div class="panel-header">
 
-<p>
-Ada pertanyaan tentang Paid Promote?
-Terus hubungi admin XNZ.
-</p>
+      <div>
+        <span class="small-title">XNZ PANEL</span>
+        <h2 data-i18n="panelTitle">NAVIGASI & KONFIGURASI</h2>
+      </div>
 
-<div class="phone">
-SMALL WHATSAPP ADMIN
-<strong>+60 14-378 3301</strong>
-</div>
+      <button
+        id="closePanel"
+        class="close-panel"
+        type="button"
+        aria-label="Tutup Panel"
+      >
+        ×
+      </button>
 
-<a
-href="https://wa.me/60143783301"
-target="_blank"
-class="btn gold"
->
-CHAT WHATSAPP
-</a>
+    </div>
 
-</div>
 
+    <!-- QUICK NAVIGATION -->
+    <div class="panel-section">
 
-<div class="form-box">
+      <h3 data-i18n="quickNav">
+        NAVIGASI PANTAS
+      </h3>
 
-<form id="contactForm">
+      <div class="quick-grid">
 
-<label>Nama Penuh</label>
+        <a href="#contact" class="quick-link">
+          <span class="quick-icon">✉</span>
+          <span data-i18n="contactUs">HUBUNGI KAMI</span>
+          <b>→</b>
+        </a>
 
-<input
-id="name"
-type="text"
-placeholder="Masukkan nama penuh"
-required
->
+        <a
+          href="https://wa.me/60143783301"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="quick-link"
+        >
+          <span class="quick-icon">WA</span>
+          <span data-i18n="whatsappAdmin">WHATSAPP ADMIN XNZ</span>
+          <b>→</b>
+        </a>
 
+      </div>
 
-<label>No. WhatsApp</label>
+    </div>
 
-<input
-id="phone"
-type="tel"
-placeholder="Contoh: 0143783301"
-required
->
 
+    <!-- WEBSITE NAVIGATION -->
+    <div class="panel-section">
 
-<label>Butiran Pertanyaan</label>
+      <h3 data-i18n="websiteNavigation">
+        WEBSITE
+      </h3>
 
-<textarea
-id="message"
-rows="6"
-placeholder="Tulis pertanyaan anda..."
-required
-></textarea>
+      <div class="panel-nav">
 
+        <a href="#accounts" data-i18n="navAccounts">
+          SENARAI ACCOUNT
+        </a>
 
-<button class="btn gold" type="submit">
-HANTAR PERMOHONAN
-</button>
+        <a href="#how-order" data-i18n="navHow">
+          HOW TO ORDER
+        </a>
 
-</form>
+        <a href="#why-xnz" data-i18n="navWhy">
+          WHY XNZ
+        </a>
 
-</div>
+        <a href="#contact" data-i18n="navContact">
+          HUBUNGI KAMI
+        </a>
 
-</div>
+      </div>
 
-</section>
+    </div>
 
-</main>
 
+    <!-- LANGUAGE -->
+    <div class="panel-section">
 
+      <h3 data-i18n="language">
+        BAHASA
+      </h3>
 
-<footer>
+      <div class="option-row">
 
-<div class="footer">
+        <button
+          class="option-btn active"
+          type="button"
+          data-language="ms"
+        >
+          MY
+        </button>
 
-<div>
-<div class="logo">XNZ<span>PAID</span></div>
-<p>Paid Promote Game Account</p>
-</div>
+        <button
+          class="option-btn"
+          type="button"
+          data-language="en"
+        >
+          ENGLISH
+        </button>
 
-<div class="footer-links">
-<a href="#home">Home</a>
-<a href="#accounts">Account</a>
-<a href="#contact">Contact</a>
-</div>
+      </div>
 
-</div>
+    </div>
 
-<div class="copyright">
-© <span id="year"></span> XNZ PAID PROMOTE. ALL RIGHTS RESERVED.
-</div>
 
-</footer>
+    <!-- THEME -->
+    <div class="panel-section">
 
+      <h3 data-i18n="theme">
+        TEMA
+      </h3>
 
-<a
-class="float-wa"
-href="https://wa.me/60143783301"
-target="_blank"
->
-WA
-</a>
+      <div class="option-row">
 
+        <button
+          class="option-btn active"
+          type="button"
+          data-theme="dark"
+        >
+          <span>●</span>
+          DARK
+        </button>
 
-<script src="accounts.js"></script>
-<script src="script.js"></script>
+        <button
+          class="option-btn"
+          type="button"
+          data-theme="light"
+        >
+          <span>○</span>
+          WHITE
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel-bottom">
+      XNZPAID • <span data-i18n="panelBottom">PAID PROMOTE</span>
+    </div>
+
+  </aside>
+
+
+  <!-- JAVASCRIPT -->
+  <script src="accounts.js"></script>
+  <script src="script.js"></script>
 
 </body>
-</html>
+            </html>
