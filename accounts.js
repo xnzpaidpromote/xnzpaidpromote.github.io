@@ -1,139 +1,156 @@
 const accounts = [
-
-{
-name:"ACCOUNT GAME #001",
-game:"GAME ACCOUNT",
-price:"CONTACT ADMIN",
-status:"AVAILABLE",
-image:"",
-description:"Account tersedia untuk dipromosikan."
-},
-
-{
-name:"ACCOUNT GAME #002",
-game:"GAME ACCOUNT",
-price:"CONTACT ADMIN",
-status:"AVAILABLE",
-image:"",
-description:"Account tersedia untuk dipromosikan."
-}
-
+  {
+    id: 1,
+    game: "MLBB",
+    category: "mlbb",
+    name: "MLBB Account #001",
+    description: "Account sedang menerima paid promote.",
+    price: "RM10",
+    status: "AVAILABLE",
+    image: ""
+  },
+  {
+    id: 2,
+    game: "FREE FIRE",
+    category: "freefire",
+    name: "Free Fire Account #001",
+    description: "Account sedang menerima paid promote.",
+    price: "RM10",
+    status: "AVAILABLE",
+    image: ""
+  },
+  {
+    id: 3,
+    game: "PUBG",
+    category: "pubg",
+    name: "PUBG Account #001",
+    description: "Account sedang menerima paid promote.",
+    price: "RM10",
+    status: "AVAILABLE",
+    image: ""
+  },
+  {
+    id: 4,
+    game: "LAIN",
+    category: "lain",
+    name: "Game Account #001",
+    description: "Account sedang menerima paid promote.",
+    price: "RM10",
+    status: "AVAILABLE",
+    image: ""
+  }
 ];
 
+const accountGrid = document.getElementById("accountGrid");
+const accountCount = document.getElementById("accountCount");
+const emptyState = document.getElementById("emptyState");
+const filterButtons = document.querySelectorAll(".filter-btn");
 
-function whatsappAccount(name){
+function showAccounts(category = "all") {
+  const list = category === "all"
+    ? accounts
+    : accounts.filter(account => account.category === category);
 
-const number="60143783301";
+  accountGrid.innerHTML = "";
 
-const message=
-"Hi XNZ, saya berminat dengan account: "+
-name+
-". Saya mahu tanya detail account.";
+  accountCount.textContent =
+    `${list.length} ACCOUNT`;
 
-const url=
-"https://wa.me/"+
-number+
-"?text="+
-encodeURIComponent(message);
+  if (!list.length) {
+    emptyState.classList.remove("hidden");
+    return;
+  }
 
-window.open(url,"_blank");
+  emptyState.classList.add("hidden");
 
+  list.forEach(account => {
+
+    const image = account.image
+      ? `<img src="${account.image}" alt="${account.name}">`
+      : `
+        <div class="image-placeholder">
+          <strong>${account.game.substring(0,3)}</strong>
+          <span>PAID PROMOTE</span>
+        </div>
+      `;
+
+    const card = document.createElement("article");
+
+    card.className = "account-card";
+
+    card.innerHTML = `
+      <div class="account-image">
+
+        <div class="account-status">
+          <span class="account-status-dot"></span>
+          ${account.status}
+        </div>
+
+        ${image}
+
+      </div>
+
+      <div class="account-info">
+
+        <div class="account-game">
+          ${account.game}
+        </div>
+
+        <h3 class="account-name">
+          ${account.name}
+        </h3>
+
+        <p class="account-description">
+          ${account.description}
+        </p>
+
+        <div class="account-bottom">
+
+          <div class="account-price">
+            ${account.price}
+            <small>PAID PROMOTE</small>
+          </div>
+
+          <button
+            class="account-button"
+            onclick="contactAccount('${account.name}')">
+            PROMOTE
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    accountGrid.appendChild(card);
+  });
 }
 
+function contactAccount(accountName) {
 
-function showAccounts(){
+  const text =
+    `Hi XNZ, saya berminat dengan paid promote untuk ${accountName}. Saya ingin tahu maklumat lanjut.`;
 
-const grid=document.getElementById("accountGrid");
+  const url =
+    `https://wa.me/60143783301?text=${encodeURIComponent(text)}`;
 
-if(!grid)return;
-
-grid.innerHTML="";
-
-accounts.forEach(function(account){
-
-const card=document.createElement("article");
-
-card.className="account-card";
-
-let image="";
-
-if(account.image){
-
-image=
-'<img src="'+
-account.image+
-'" alt="'+
-account.name+
-'">';
-
-}else{
-
-image="ACCOUNT IMAGE";
-
+  window.open(url, "_blank");
 }
 
+filterButtons.forEach(button => {
 
-card.innerHTML=
+  button.addEventListener("click", () => {
 
-'<div class="account-image">'+
-image+
-'</div>'+
+    filterButtons.forEach(btn =>
+      btn.classList.remove("active")
+    );
 
-'<div class="account-info">'+
+    button.classList.add("active");
 
-'<span class="status">'+
-account.status+
-'</span>'+
+    showAccounts(button.dataset.game);
 
-'<h3>'+
-account.name+
-'</h3>'+
-
-'<div class="game">'+
-account.game+
-'</div>'+
-
-'<p class="desc">'+
-account.description+
-'</p>'+
-
-'<div class="account-bottom">'+
-
-'<div class="price">'+
-account.price+
-'</div>'+
-
-'<button class="detail">'+
-'LIHAT DETAIL'+
-'</button>'+
-
-'</div>'+
-
-'</div>';
-
-
-card
-.querySelector(".detail")
-.addEventListener(
-"click",
-function(){
-
-whatsappAccount(
-account.name
-);
-
-}
-);
-
-
-grid.appendChild(card);
+  });
 
 });
 
-}
-
-
-document.addEventListener(
-"DOMContentLoaded",
-showAccounts
-);
+showAccounts();
