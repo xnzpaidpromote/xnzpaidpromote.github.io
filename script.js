@@ -1,112 +1,115 @@
-// ==========================================
-// XNZ PAID PROMOTE
-// WEBSITE FUNCTIONS
-// ==========================================
+const menuBtn=
+document.getElementById("menuBtn");
+
+const navMenu=
+document.getElementById("navMenu");
 
 
-// MOBILE MENU
-const menuBtn = document.getElementById("menuBtn");
-const navMenu = document.getElementById("navMenu");
+if(menuBtn){
 
-if (menuBtn && navMenu) {
+menuBtn.addEventListener(
+"click",
+function(){
 
-    menuBtn.addEventListener("click", function () {
-        navMenu.classList.toggle("active");
-    });
+navMenu.classList.toggle("active");
+
+}
+);
 
 }
 
 
-// CLOSE MOBILE MENU
-const navLinks = document.querySelectorAll(".nav-menu a");
+document
+.querySelectorAll("#navMenu a")
+.forEach(function(link){
 
-navLinks.forEach(function (link) {
+link.addEventListener(
+"click",
+function(){
 
-    link.addEventListener("click", function () {
-        navMenu.classList.remove("active");
-    });
+navMenu.classList.remove("active");
+
+}
+);
 
 });
 
 
-// CONTACT FORM
-const contactForm = document.getElementById("contactForm");
-
-if (contactForm) {
-
-    contactForm.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-        const name = document.getElementById("name").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const message = document.getElementById("message").value.trim();
-
-        if (!name || !phone || !message) {
-
-            alert("Sila lengkapkan semua maklumat.");
-
-            return;
-
-        }
+const form=
+document.getElementById("contactForm");
 
 
-        const whatsappNumber = "60143783301";
+if(form){
+
+form.addEventListener(
+"submit",
+function(event){
+
+event.preventDefault();
+
+const name=
+document
+.getElementById("name")
+.value
+.trim();
+
+const phone=
+document
+.getElementById("phone")
+.value
+.trim();
+
+const message=
+document
+.getElementById("message")
+.value
+.trim();
 
 
-        const whatsappMessage =
-            "HI XNZ, SAYA MAHU BUAT PERTANYAAN.%0A%0A" +
-            "NAMA PENUH: " +
-            encodeURIComponent(name) +
-            "%0A" +
-            "NO. WHATSAPP: " +
-            encodeURIComponent(phone) +
-            "%0A" +
-            "BUTIRAN PERTANYAAN:%0A" +
-            encodeURIComponent(message);
+if(!name||!phone||!message){
 
+alert(
+"Sila lengkapkan semua maklumat."
+);
 
-        const whatsappURL =
-            "https://wa.me/" +
-            whatsappNumber +
-            "?text=" +
-            whatsappMessage;
-
-
-        window.open(
-            whatsappURL,
-            "_blank",
-            "noopener,noreferrer"
-        );
-
-
-        contactForm.reset();
-
-    });
+return;
 
 }
 
 
-// UPDATE YEAR
-const footerYear = document.querySelector(".footer-bottom");
+const text=
+"HI XNZ, SAYA MAHU BUAT PERTANYAAN.\n\n"+
+"NAMA PENUH: "+name+"\n"+
+"NO. WHATSAPP: "+phone+"\n"+
+"BUTIRAN PERTANYAAN:\n"+
+message;
 
-if (footerYear) {
 
-    footerYear.innerHTML =
-        "© " +
-        new Date().getFullYear() +
-        " XNZ PAID PROMOTE. ALL RIGHTS RESERVED.";
+const url=
+"https://wa.me/60143783301?text="+
+encodeURIComponent(text);
+
+
+window.open(
+url,
+"_blank"
+);
+
+
+form.reset();
+
+}
+);
 
 }
 
 
-// PREVENT EMPTY LINKS
-document.querySelectorAll('a[href="#"]').forEach(function (link) {
+const year=
+document.getElementById("year");
 
-    link.addEventListener("click", function (event) {
+if(year){
 
-        event.preventDefault();
+year.textContent=
+new Date().getFullYear();
 
-    });
-
-});
+}
