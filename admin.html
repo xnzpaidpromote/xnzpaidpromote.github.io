@@ -2,407 +2,1421 @@
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XNZ Paid Promote - Admin</title>
+
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
 body{
- margin:0;background:#080808;color:#fff;
- font-family:Arial,sans-serif;padding:20px
+  margin:0;
+  background:#080808;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  padding:20px;
 }
+
+.container{
+  max-width:900px;
+  margin:auto;
+}
+
 .box{
- max-width:600px;margin:auto;background:#111;
- border:1px solid #333;border-radius:16px;padding:20px
+  background:#111;
+  border:1px solid #333;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:20px;
 }
-h1{color:#d4af37;text-align:center}
-h2{color:#d4af37}
-input,select,textarea,button{
- width:100%;padding:13px;margin:7px 0;
- border-radius:9px;border:1px solid #444;
- background:#181818;color:#fff;font-size:15px
+
+h1,h2{
+  color:#d4af37;
 }
+
+h1{
+  text-align:center;
+}
+
+input,
+select,
+textarea,
 button{
- background:#d4af37;color:#000;border:0;
- font-weight:bold;cursor:pointer
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border-radius:9px;
+  border:1px solid #444;
+  font-size:15px;
 }
-button.red{background:#b3261e;color:#fff}
-button.gray{background:#333;color:#fff}
-.hidden{display:none}
-.card{
- border:1px solid #333;border-radius:12px;
- padding:14px;margin:12px 0;background:#151515
+
+input,
+select,
+textarea{
+  background:#181818;
+  color:#fff;
 }
-.card img{
- width:100%;max-height:220px;object-fit:cover;
- border-radius:8px;margin-bottom:10px
+
+textarea{
+  min-height:100px;
+  resize:vertical;
 }
-.price{color:#d4af37;font-size:20px;font-weight:bold}
-.status{font-weight:bold}
-#msg{text-align:center;margin:10px 0;color:#d4af37}
+
+button{
+  background:#d4af37;
+  color:#000;
+  font-weight:bold;
+  border:none;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+button.red{
+  background:#b32626;
+  color:#fff;
+}
+
+button.gray{
+  background:#333;
+  color:#fff;
+}
+
+button.green{
+  background:#208b45;
+  color:#fff;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.error{
+  color:#ff5555;
+  margin-top:10px;
+}
+
+.success{
+  color:#45d483;
+  margin-top:10px;
+}
+
 .stats{
- display:grid;grid-template-columns:repeat(3,1fr);
- gap:8px;margin:12px 0
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
+
 .stat{
- background:#181818;border:1px solid #333;
- border-radius:10px;padding:12px;text-align:center
+  background:#181818;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
 }
-.stat b{display:block;font-size:22px;color:#d4af37}
+
+.stat strong{
+  display:block;
+  font-size:25px;
+  color:#d4af37;
+  margin-top:5px;
+}
+
+.account{
+  background:#181818;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:15px;
+  margin:12px 0;
+}
+
+.account img{
+  width:100%;
+  max-height:220px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+.account-title{
+  font-size:18px;
+  font-weight:bold;
+  color:#d4af37;
+}
+
+.account-info{
+  line-height:1.6;
+  color:#ddd;
+  margin-top:8px;
+}
+
+.status{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.available{
+  background:#155d35;
+  color:#7dffad;
+}
+
+.hidden-status{
+  background:#5d1515;
+  color:#ff8d8d;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:10px;
+}
+
+.actions button{
+  margin:0;
+}
+
+.preview{
+  margin-top:8px;
+}
+
+.preview img{
+  width:100%;
+  max-height:180px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.small{
+  font-size:13px;
+  color:#999;
+}
+
+@media(max-width:600px){
+  body{
+    padding:12px;
+  }
+
+  .box{
+    padding:15px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .actions{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
 
 <!-- LOGIN -->
-<section id="login">
-<h1>XNZPAID ADMIN</h1>
-<p style="text-align:center">Admin Panel</p>
+<div id="loginBox" class="box">
+  <h1>XNZ PAID PROMOTE</h1>
 
-<input id="password" type="password" placeholder="Admin Password">
+  <p style="text-align:center;color:#aaa;">
+    Admin Panel
+  </p>
 
-<button onclick="login()">LOGIN</button>
+  <input
+    type="password"
+    id="password"
+    placeholder="Masukkan password admin"
+    autocomplete="current-password"
+  >
 
-<div id="loginMsg"></div>
-</section>
+  <button onclick="login()">
+    LOGIN ADMIN
+  </button>
 
-<!-- PANEL -->
-<section id="panel" class="hidden">
-
-<h1>XNZPAID ADMIN</h1>
-
-<button class="gray" onclick="logout()">LOGOUT</button>
-
-<div class="stats">
-<div class="stat">
-<b id="total">0</b>
-Total
-</div>
-<div class="stat">
-<b id="available">0</b>
-Available
-</div>
-<div class="stat">
-<b id="hidden">0</b>
-Hidden
-</div>
+  <div id="loginMessage"></div>
 </div>
 
-<h2>Tambah Account</h2>
 
-<select id="game">
-<option value="MLBB">MLBB</option>
-<option value="FREE FIRE">FREE FIRE</option>
-<option value="PUBG">PUBG</option>
-<option value="LAIN">LAIN</option>
-</select>
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="hidden">
 
-<input id="name" placeholder="Nama Account">
+  <div class="box">
+    <h1>ADMIN DASHBOARD</h1>
 
-<input id="username" placeholder="ID / Username">
+    <div class="stats">
 
-<input id="price" type="number" placeholder="Harga RM">
+      <div class="stat">
+        TOTAL
+        <strong id="totalCount">0</strong>
+      </div>
 
-<input id="image" placeholder="URL Gambar Account">
+      <div class="stat">
+        AVAILABLE
+        <strong id="availableCount">0</strong>
+      </div>
 
-<textarea id="details" rows="5"
-placeholder="Detail account"></textarea>
+      <div class="stat">
+        HIDDEN
+        <strong id="hiddenCount">0</strong>
+      </div>
 
-<select id="status">
-<option value="AVAILABLE">AVAILABLE</option>
-<option value="HIDDEN">HIDDEN</option>
-</select>
+    </div>
 
-<button onclick="addAccount()">TAMBAH ACCOUNT</button>
+    <button class="gray" onclick="logout()">
+      LOGOUT
+    </button>
+  </div>
 
-<div id="msg"></div>
 
-<h2>Senarai Account</h2>
+  <!-- ADD / EDIT -->
+  <div class="box">
 
-<div id="list">Loading...</div>
+    <h2 id="formTitle">
+      Tambah Account
+    </h2>
 
-</section>
+    <input
+      type="hidden"
+      id="accountId"
+    >
+
+    <label>Game</label>
+
+    <select id="game">
+      <option value="MLBB">MLBB</option>
+      <option value="FREE FIRE">FREE FIRE</option>
+      <option value="PUBG">PUBG</option>
+      <option value="LAIN">LAIN</option>
+    </select>
+
+
+    <label>Nama Account</label>
+
+    <input
+      type="text"
+      id="accountName"
+      placeholder="Contoh: MLBB Account #001"
+    >
+
+
+    <label>Username / ID</label>
+
+    <input
+      type="text"
+      id="username"
+      placeholder="Username atau ID account"
+    >
+
+
+    <label>Harga (RM)</label>
+
+    <input
+      type="number"
+      id="price"
+      placeholder="10"
+      min="0"
+      step="0.01"
+    >
+
+
+    <label>Details</label>
+
+    <textarea
+      id="details"
+      placeholder="Contoh: Mythic, 50 skins, 10 collector..."
+    ></textarea>
+
+
+    <label>Image URL</label>
+
+    <input
+      type="url"
+      id="imageUrl"
+      placeholder="https://..."
+      oninput="previewImage()"
+    >
+
+    <div id="imagePreview" class="preview"></div>
+
+    <p class="small">
+      Masukkan link gambar account. Fungsi upload gambar sebenar akan dibuat selepas sistem utama siap.
+    </p>
+
+
+    <label>Status</label>
+
+    <select id="status">
+      <option value="AVAILABLE">AVAILABLE</option>
+      <option value="HIDDEN">HIDDEN</option>
+    </select>
+
+
+    <button
+      id="saveButton"
+      onclick="saveAccount()"
+    >
+      TAMBAH ACCOUNT
+    </button>
+
+
+    <button
+      id="cancelButton"
+      class="gray hidden"
+      onclick="resetForm()"
+    >
+      BATAL EDIT
+    </button>
+
+
+    <div id="formMessage"></div>
+
+  </div>
+
+
+  <!-- ACCOUNT LIST -->
+  <div class="box">
+
+    <h2>Senarai Account</h2>
+
+    <button
+      class="gray"
+      onclick="loadAccounts()"
+    >
+      REFRESH
+    </button>
+
+    <div id="accountList">
+      Loading...
+    </div>
+
+  </div>
 
 </div>
+
+</div>
+
 
 <script>
 
 const API =
-"https://xnzhub-github-io.xnzresellerbackup.workers.dev";
+  "https://xnzpaidpromote-api.xnzresellerbackup.workers.dev";
 
-let token = sessionStorage.getItem("xnz_admin_token");
 
-function showPanel(){
- document.getElementById("login").classList.add("hidden");
- document.getElementById("panel").classList.remove("hidden");
- loadAccounts();
-}
+let token =
+  sessionStorage.getItem("xnz_paid_admin_token") || "";
 
-function logout(){
- sessionStorage.removeItem("xnz_admin_token");
- token="";
- location.reload();
-}
 
-async function login(){
-
- const password =
- document.getElementById("password").value.trim();
-
- if(!password){
-  document.getElementById("loginMsg").textContent =
-  "Masukkan password.";
-  return;
- }
-
- try{
-
-  const r=await fetch(API+"/api/admin/login",{
-   method:"POST",
-   headers:{
-    "Content-Type":"application/json"
-   },
-   body:JSON.stringify({password})
-  });
-
-  const d=await r.json();
-
-  if(!r.ok){
-   throw new Error(d.error||"Login gagal");
-  }
-
-  token=d.token;
-
-  sessionStorage.setItem(
-   "xnz_admin_token",
-   token
-  );
-
-  showPanel();
-
- }catch(e){
-
-  document.getElementById("loginMsg").textContent =
-  e.message;
-
- }
-}
-
-async function loadAccounts(){
-
- try{
-
-  const r=await fetch(
-   API+"/api/admin/accounts",
-   {
-    headers:{
-     "Authorization":"Bearer "+token
-    }
-   }
-  );
-
-  const d=await r.json();
-
-  if(!r.ok){
-   throw new Error(d.error||"Gagal load account");
-  }
-
-  const accounts=d.accounts||[];
-
-  document.getElementById("total").textContent =
-   accounts.length;
-
-  document.getElementById("available").textContent =
-   accounts.filter(a=>a.status==="AVAILABLE").length;
-
-  document.getElementById("hidden").textContent =
-   accounts.filter(a=>a.status==="HIDDEN").length;
-
-  if(!accounts.length){
-   document.getElementById("list").innerHTML=
-   "<p>Belum ada account.</p>";
-   return;
-  }
-
-  document.getElementById("list").innerHTML=
-  accounts.map(a=>`
-
-   <div class="card">
-
-   ${a.image_url?
-   `<img src="${escapeHtml(a.image_url)}"
-   onerror="this.style.display='none'">`
-   :""}
-
-   <h3>${escapeHtml(a.account_name)}</h3>
-
-   <p>Game: ${escapeHtml(a.game)}</p>
-
-   <p>ID: ${escapeHtml(a.username||"-")}</p>
-
-   <p class="price">
-   RM ${Number(a.price).toFixed(2)}
-   </p>
-
-   <p>${escapeHtml(a.details||"")}</p>
-
-   <p class="status">
-   Status: ${escapeHtml(a.status)}
-   </p>
-
-   <button onclick="toggleStatus(${a.id},'${a.status}')">
-   ${a.status==="AVAILABLE"?"HIDE":"ACTIVATE"}
-   </button>
-
-   <button class="red"
-   onclick="deleteAccount(${a.id})">
-   DELETE
-   </button>
-
-   </div>
-
-  `).join("");
-
- }catch(e){
-
-  document.getElementById("list").textContent=
-   e.message;
-
- }
-}
-
-async function addAccount(){
-
- const data={
-  game:document.getElementById("game").value,
-  account_name:document.getElementById("name").value.trim(),
-  username:document.getElementById("username").value.trim(),
-  price:Number(document.getElementById("price").value),
-  image_url:document.getElementById("image").value.trim(),
-  details:document.getElementById("details").value.trim(),
-  status:document.getElementById("status").value
- };
-
- if(!data.account_name||!data.price){
-  document.getElementById("msg").textContent=
-  "Nama account dan harga diperlukan.";
-  return;
- }
-
- try{
-
-  const r=await fetch(
-   API+"/api/admin/accounts",
-   {
-    method:"POST",
-    headers:{
-     "Content-Type":"application/json",
-     "Authorization":"Bearer "+token
-    },
-    body:JSON.stringify(data)
-   }
-  );
-
-  const d=await r.json();
-
-  if(!r.ok){
-   throw new Error(d.error||"Gagal tambah account");
-  }
-
-  document.getElementById("msg").textContent=
-   "Account berjaya ditambah.";
-
-  document.getElementById("name").value="";
-  document.getElementById("username").value="";
-  document.getElementById("price").value="";
-  document.getElementById("image").value="";
-  document.getElementById("details").value="";
-
-  loadAccounts();
-
- }catch(e){
-
-  document.getElementById("msg").textContent=
-   e.message;
-
- }
-}
-
-async function toggleStatus(id,status){
-
- const newStatus=
-  status==="AVAILABLE"?"HIDDEN":"AVAILABLE";
-
- try{
-
-  const r=await fetch(
-   API+"/api/admin/accounts/"+id,
-   {
-    method:"PUT",
-    headers:{
-     "Content-Type":"application/json",
-     "Authorization":"Bearer "+token
-    },
-    body:JSON.stringify({
-     status:newStatus
-    })
-   }
-  );
-
-  if(!r.ok){
-   const d=await r.json();
-   throw new Error(d.error||"Gagal ubah status");
-  }
-
-  loadAccounts();
-
- }catch(e){
-  alert(e.message);
- }
-}
-
-async function deleteAccount(id){
-
- if(!confirm("Delete account ini?")) return;
-
- try{
-
-  const r=await fetch(
-   API+"/api/admin/accounts/"+id,
-   {
-    method:"DELETE",
-    headers:{
-     "Authorization":"Bearer "+token
-    }
-   }
-  );
-
-  if(!r.ok){
-   const d=await r.json();
-   throw new Error(d.error||"Gagal delete");
-  }
-
-  loadAccounts();
-
- }catch(e){
-  alert(e.message);
- }
-}
+/* =========================
+   SECURITY / HTML ESCAPE
+========================= */
 
 function escapeHtml(value){
 
- return String(value)
- .replace(/&/g,"&amp;")
- .replace(/</g,"&lt;")
- .replace(/>/g,"&gt;")
- .replace(/"/g,"&quot;")
- .replace(/'/g,"&#039;");
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
+
+/* =========================
+   LOGIN
+========================= */
+
+async function login(){
+
+  const password =
+    document.getElementById("password").value.trim();
+
+  const message =
+    document.getElementById("loginMessage");
+
+  message.className="";
+  message.textContent="";
+
+  if(!password){
+
+    message.className="error";
+    message.textContent=
+      "Masukkan password admin.";
+
+    return;
+  }
+
+  try{
+
+    const response =
+      await fetch(API + "/api/admin/login",{
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+          password:password
+        })
+
+      });
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      message.className="error";
+
+      message.textContent =
+        data.error || "Login gagal.";
+
+      return;
+    }
+
+
+    if(!data.token){
+
+      message.className="error";
+
+      message.textContent =
+        "Token login tidak diterima.";
+
+      return;
+    }
+
+
+    token = data.token;
+
+    sessionStorage.setItem(
+      "xnz_paid_admin_token",
+      token
+    );
+
+
+    document.getElementById(
+      "password"
+    ).value="";
+
+
+    showPanel();
+
+  }catch(error){
+
+    message.className="error";
+
+    message.textContent =
+      "Tidak dapat sambung ke server.";
+
+  }
+
+}
+
+
+/* =========================
+   SHOW PANEL
+========================= */
+
+function showPanel(){
+
+  document
+    .getElementById("loginBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("adminPanel")
+    .classList.remove("hidden");
+
+  loadStats();
+
+  loadAccounts();
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout(){
+
+  token="";
+
+  sessionStorage.removeItem(
+    "xnz_paid_admin_token"
+  );
+
+  document
+    .getElementById("adminPanel")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginBox")
+    .classList.remove("hidden");
+
+}
+
+
+/* =========================
+   AUTH HEADERS
+========================= */
+
+function authHeaders(){
+
+  return {
+
+    "Content-Type":"application/json",
+
+    "Authorization":
+      "Bearer " + token
+
+  };
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+async function loadStats(){
+
+  try{
+
+    const response =
+      await fetch(
+        API + "/api/admin/stats",
+        {
+          headers:{
+            "Authorization":
+              "Bearer " + token
+          }
+        }
+      );
+
+
+    if(response.status===401){
+
+      logout();
+
+      return;
+    }
+
+
+    const data =
+      await response.json();
+
+
+    document.getElementById(
+      "totalCount"
+    ).textContent =
+      data.total ?? 0;
+
+
+    document.getElementById(
+      "availableCount"
+    ).textContent =
+      data.available ?? 0;
+
+
+    document.getElementById(
+      "hiddenCount"
+    ).textContent =
+      data.hidden ?? 0;
+
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+
+/* =========================
+   LOAD ACCOUNTS
+========================= */
+
+async function loadAccounts(){
+
+  const list =
+    document.getElementById("accountList");
+
+  list.innerHTML =
+    "Loading...";
+
+
+  try{
+
+    const response =
+      await fetch(
+        API + "/api/admin/accounts",
+        {
+          headers:{
+            "Authorization":
+              "Bearer " + token
+          }
+        }
+      );
+
+
+    if(response.status===401){
+
+      logout();
+
+      return;
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      list.innerHTML =
+        '<div class="error">' +
+        escapeHtml(data.error || "Gagal load account.") +
+        '</div>';
+
+      return;
+    }
+
+
+    const accounts =
+      data.accounts || [];
+
+
+    if(accounts.length===0){
+
+      list.innerHTML =
+        '<p class="small">Belum ada account.</p>';
+
+      return;
+    }
+
+
+    list.innerHTML =
+      accounts
+        .map(accountCard)
+        .join("");
+
+
+  }catch(error){
+
+    list.innerHTML =
+      '<div class="error">' +
+      'Tidak dapat sambung ke Worker.' +
+      '</div>';
+
+  }
+
+}
+
+
+/* =========================
+   ACCOUNT CARD
+========================= */
+
+function accountCard(account){
+
+  const image =
+    account.image_url
+      ? `
+        <img
+          src="${escapeHtml(account.image_url)}"
+          alt="Account image"
+          onerror="this.style.display='none'"
+        >
+      `
+      : "";
+
+
+  const statusClass =
+    account.status === "AVAILABLE"
+      ? "available"
+      : "hidden-status";
+
+
+  const statusText =
+    account.status === "AVAILABLE"
+      ? "AVAILABLE"
+      : "HIDDEN";
+
+
+  const nextStatus =
+    account.status === "AVAILABLE"
+      ? "HIDDEN"
+      : "AVAILABLE";
+
+
+  const nextButton =
+    account.status === "AVAILABLE"
+      ? "HIDE"
+      : "ACTIVATE";
+
+
+  return `
+
+    <div class="account">
+
+      ${image}
+
+      <div class="account-title">
+        ${escapeHtml(account.account_name)}
+      </div>
+
+      <div class="account-info">
+
+        <strong>Game:</strong>
+        ${escapeHtml(account.game)}
+        <br>
+
+        <strong>ID / Username:</strong>
+        ${escapeHtml(account.username || "-")}
+        <br>
+
+        <strong>Harga:</strong>
+        RM ${Number(account.price || 0).toFixed(2)}
+        <br>
+
+        <strong>Details:</strong>
+        ${escapeHtml(account.details || "-")}
+
+      </div>
+
+      <span class="status ${statusClass}">
+        ${statusText}
+      </span>
+
+
+      <div class="actions">
+
+        <button
+          onclick="editAccount(${Number(account.id)})"
+        >
+          EDIT
+        </button>
+
+        <button
+          class="green"
+          onclick="changeStatus(${Number(account.id)},'${nextStatus}')"
+        >
+          ${nextButton}
+        </button>
+
+        <button
+          class="red"
+          onclick="deleteAccount(${Number(account.id)})"
+        >
+          DELETE
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   GET ONE ACCOUNT
+========================= */
+
+async function getAccount(id){
+
+  const response =
+    await fetch(
+      API + "/api/admin/accounts",
+      {
+        headers:{
+          "Authorization":
+            "Bearer " + token
+        }
+      }
+    );
+
+
+  if(response.status===401){
+
+    logout();
+
+    return null;
+  }
+
+
+  const data =
+    await response.json();
+
+
+  const accounts =
+    data.accounts || [];
+
+
+  return accounts.find(
+    item => Number(item.id) === Number(id)
+  ) || null;
+
+}
+
+
+/* =========================
+   EDIT ACCOUNT
+========================= */
+
+async function editAccount(id){
+
+  const account =
+    await getAccount(id);
+
+
+  if(!account){
+
+    alert("Account tidak dijumpai.");
+
+    return;
+  }
+
+
+  document.getElementById(
+    "accountId"
+  ).value =
+    account.id;
+
+
+  document.getElementById(
+    "game"
+  ).value =
+    account.game;
+
+
+  document.getElementById(
+    "accountName"
+  ).value =
+    account.account_name;
+
+
+  document.getElementById(
+    "username"
+  ).value =
+    account.username || "";
+
+
+  document.getElementById(
+    "price"
+  ).value =
+    account.price;
+
+
+  document.getElementById(
+    "details"
+  ).value =
+    account.details || "";
+
+
+  document.getElementById(
+    "imageUrl"
+  ).value =
+    account.image_url || "";
+
+
+  document.getElementById(
+    "status"
+  ).value =
+    account.status || "AVAILABLE";
+
+
+  document.getElementById(
+    "formTitle"
+  ).textContent =
+    "Edit Account";
+
+
+  document.getElementById(
+    "saveButton"
+  ).textContent =
+    "SIMPAN PERUBAHAN";
+
+
+  document.getElementById(
+    "cancelButton"
+  ).classList.remove("hidden");
+
+
+  previewImage();
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================
+   SAVE ACCOUNT
+========================= */
+
+async function saveAccount(){
+
+  const id =
+    document.getElementById(
+      "accountId"
+    ).value;
+
+
+  const game =
+    document.getElementById(
+      "game"
+    ).value;
+
+
+  const accountName =
+    document.getElementById(
+      "accountName"
+    ).value.trim();
+
+
+  const username =
+    document.getElementById(
+      "username"
+    ).value.trim();
+
+
+  const price =
+    document.getElementById(
+      "price"
+    ).value;
+
+
+  const details =
+    document.getElementById(
+      "details"
+    ).value.trim();
+
+
+  const imageUrl =
+    document.getElementById(
+      "imageUrl"
+    ).value.trim();
+
+
+  const status =
+    document.getElementById(
+      "status"
+    ).value;
+
+
+  const message =
+    document.getElementById(
+      "formMessage"
+    );
+
+
+  message.className="";
+  message.textContent="";
+
+
+  if(!accountName){
+
+    message.className="error";
+
+    message.textContent =
+      "Nama account diperlukan.";
+
+    return;
+  }
+
+
+  if(price === "" || Number(price) < 0){
+
+    message.className="error";
+
+    message.textContent =
+      "Harga tidak sah.";
+
+    return;
+  }
+
+
+  const body = {
+
+    game:game,
+
+    account_name:accountName,
+
+    username:username,
+
+    price:Number(price),
+
+    details:details,
+
+    image_url:imageUrl,
+
+    status:status
+
+  };
+
+
+  try{
+
+    let response;
+
+
+    if(id){
+
+      response =
+        await fetch(
+          API + "/api/admin/accounts/" + id,
+          {
+            method:"PUT",
+            headers:authHeaders(),
+            body:JSON.stringify(body)
+          }
+        );
+
+    }else{
+
+      response =
+        await fetch(
+          API + "/api/admin/accounts",
+          {
+            method:"POST",
+            headers:authHeaders(),
+            body:JSON.stringify(body)
+          }
+        );
+
+    }
+
+
+    if(response.status===401){
+
+      logout();
+
+      return;
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      message.className="error";
+
+      message.textContent =
+        data.error ||
+        "Gagal simpan account.";
+
+      return;
+    }
+
+
+    message.className="success";
+
+    message.textContent =
+      id
+        ? "Account berjaya dikemaskini."
+        : "Account berjaya ditambah.";
+
+
+    resetForm(false);
+
+    await loadStats();
+
+    await loadAccounts();
+
+
+  }catch(error){
+
+    message.className="error";
+
+    message.textContent =
+      "Tidak dapat sambung ke Worker.";
+
+  }
+
+}
+
+
+/* =========================
+   CHANGE STATUS
+========================= */
+
+async function changeStatus(id,status){
+
+  try{
+
+    const response =
+      await fetch(
+        API + "/api/admin/status",
+        {
+          method:"PUT",
+          headers:authHeaders(),
+          body:JSON.stringify({
+            id:Number(id),
+            status:status
+          })
+        }
+      );
+
+
+    if(response.status===401){
+
+      logout();
+
+      return;
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      alert(
+        data.error ||
+        "Gagal ubah status."
+      );
+
+      return;
+    }
+
+
+    await loadStats();
+
+    await loadAccounts();
+
+
+  }catch(error){
+
+    alert(
+      "Tidak dapat sambung ke Worker."
+    );
+
+  }
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+async function deleteAccount(id){
+
+  const confirmDelete =
+    confirm(
+      "Betul mahu DELETE account ini?"
+    );
+
+
+  if(!confirmDelete){
+
+    return;
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        API + "/api/admin/accounts/" + id,
+        {
+          method:"DELETE",
+          headers:{
+            "Authorization":
+              "Bearer " + token
+          }
+        }
+      );
+
+
+    if(response.status===401){
+
+      logout();
+
+      return;
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      alert(
+        data.error ||
+        "Gagal delete account."
+      );
+
+      return;
+    }
+
+
+    await loadStats();
+
+    await loadAccounts();
+
+
+  }catch(error){
+
+    alert(
+      "Tidak dapat sambung ke Worker."
+    );
+
+  }
+
+}
+
+
+/* =========================
+   RESET FORM
+========================= */
+
+function resetForm(clearMessage=true){
+
+  document.getElementById(
+    "accountId"
+  ).value="";
+
+
+  document.getElementById(
+    "game"
+  ).value="MLBB";
+
+
+  document.getElementById(
+    "accountName"
+  ).value="";
+
+
+  document.getElementById(
+    "username"
+  ).value="";
+
+
+  document.getElementById(
+    "price"
+  ).value="";
+
+
+  document.getElementById(
+    "details"
+  ).value="";
+
+
+  document.getElementById(
+    "imageUrl"
+  ).value="";
+
+
+  document.getElementById(
+    "status"
+  ).value="AVAILABLE";
+
+
+  document.getElementById(
+    "formTitle"
+  ).textContent =
+    "Tambah Account";
+
+
+  document.getElementById(
+    "saveButton"
+  ).textContent =
+    "TAMBAH ACCOUNT";
+
+
+  document.getElementById(
+    "cancelButton"
+  ).classList.add("hidden");
+
+
+  document.getElementById(
+    "imagePreview"
+  ).innerHTML="";
+
+
+  if(clearMessage){
+
+    document.getElementById(
+      "formMessage"
+    ).textContent="";
+
+  }
+
+}
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+function previewImage(){
+
+  const url =
+    document.getElementById(
+      "imageUrl"
+    ).value.trim();
+
+
+  const preview =
+    document.getElementById(
+      "imagePreview"
+    );
+
+
+  if(!url){
+
+    preview.innerHTML="";
+
+    return;
+  }
+
+
+  preview.innerHTML = `
+
+    <img
+      src="${escapeHtml(url)}"
+      alt="Preview"
+      onerror="this.style.display='none'"
+    >
+
+  `;
+
+}
+
+
+/* =========================
+   AUTO LOGIN PANEL
+========================= */
+
 if(token){
- showPanel();
+
+  showPanel();
+
 }
 
 </script>
